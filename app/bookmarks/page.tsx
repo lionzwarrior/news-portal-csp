@@ -20,21 +20,23 @@ export default function BookmarkPage() {
   const [newsList, setNewsList] = useState<News[]>([]);
   const [bookmarkedNews, setBookmarkedNews] = useState<News[]>([]);
 
-  async function fetchUser() {
-    const user: User = await getUser();
-    setUser(user);
-  }
-
-  async function fetchNews() {
-    const news: News[] = await getNews();
-    setNewsList(news);
-  }
-
   useEffect(() => {
-    fetchUser()
-    fetchNews()
-    setBookmarkedNews(newsList.filter(news => user?.bookmarks.includes(news.id)))
+    const fetchData = async () => {
+      const fetchedUser: User = await getUser();
+      const fetchedNews: News[] = await getNews();
+
+      setUser(fetchedUser);
+      setNewsList(fetchedNews);
+
+      const filteredNews = fetchedNews.filter(news =>
+        fetchedUser.bookmarks.includes(news.id)
+      );
+      setBookmarkedNews(filteredNews);
+    };
+
+    fetchData();
   }, []);
+
 
   return (
     <div>
