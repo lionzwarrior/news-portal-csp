@@ -1,0 +1,85 @@
+{
+  "user": [
+    {
+      "id": "1",
+      "name": "admin",
+      "userType": "admin",
+      "username": "admin",
+      "password": "admin",
+      "bookmarks": []
+    }
+  ],
+  "news": [
+    {
+      "id": "1",
+      "title": "Over 4 Million Americans Roll Up Sleeves For Omicron-Targeted COVID Boosters",
+      "description": "Health experts said it is too early to predict whether demand would match up with the 171 million doses of the new boosters the U.S. ordered for the fall.",
+      "body": "",
+      "category": "U.S. NEWS",
+      "author": "Carla K. Johnson, AP",
+      "url": "https://www.huffpost.com/entry/covid-boosters-uptake-us_n_632d719ee4b087fae6feaac9",
+      "image": "https://picsum.photos/seed/usnews0/600/400",
+      "likes": 1,
+      "bookmarks": 0,
+      "comments": []
+    },
+    {
+      "id": "2",
+      "title": "American Airlines Flyer Charged, Banned For Life After Punching Flight Attendant On Video",
+      "description": "He was subdued by passengers and crew when he fled to the back of the aircraft after the confrontation, according to the U.S. attorney's office in Los Angeles.",
+      "body": "",
+      "category": "U.S. NEWS",
+      "author": "Mary Papenfuss",
+      "url": "https://www.huffpost.com/entry/american-airlines-passenger-banned-flight-attendant-punch-justice-department_n_632e25d3e4b0e247890329fe",
+      "image": "https://picsum.photos/seed/usnews1/600/400",
+      "likes": 7,
+      "bookmarks": 0,
+      "comments": []
+    },
+    {
+      "id": "3",
+      "title": "23 Of The Funniest Tweets About Cats And Dogs This Week (Sept. 17-23)",
+      "description": "\"Until you have a dog you don't understand what could be eaten.\"",
+      "body": "",
+      "category": "COMEDY",
+      "author": "Elyse Wanshel",
+      "url": "https://www.huffpost.com/entry/funniest-tweets-cats-dogs-september-17-23_n_632de332e4b0695c1d81dc02",
+      "image": "https://picsum.photos/seed/general2/600/400",
+      "likes": 13,
+      "bookmarks": 0,
+      "comments": []
+    },
+    {
+      "id": "4",
+      "title": "The Funniest Tweets From Parents This Week (Sept. 17-23)",
+      "description": "\"Accidentally put grown-up toothpaste on my toddler’s toothbrush and he screamed like I was cleaning his teeth with a Carolina Reaper dipped in Tabasco sauce.\"",
+      "body": "",
+      "category": "PARENTING",
+      "author": "Caroline Bologna",
+      "url": "https://www.huffpost.com/entry/funniest-parenting-tweets_l_632d7d15e4b0d12b5403e479",
+      "image": "https://picsum.photos/seed/parenting3/600/400",
+      "likes": 4,
+      "bookmarks": 0,
+      "comments": []
+    },
+    {
+      "id": "5",
+      "title": "Woman Who Called Cops On Black Bird-Watcher Loses Lawsuit Against Ex-Employer",
+      "description": "Amy Cooper accused investment firm Franklin Templeton of unfairly firing her and branding her a racist after video of the Central Park encounter went viral.",
+      "body": "",
+      "category": "U.S. NEWS",
+      "author": "Nina Golgowski",
+      "url": "https://www.huffpost.com/entry/amy-cooper-loses-discrimination-lawsuit-franklin-templeton_n_632c6463e4b09d8701bd227e",
+      "image": "https://picsum.photos/seed/usnews4/600/400",
+      "likes": 0,
+      "bookmarks": 0,
+      "comments": []
+    },
+    {
+      "title": "asdf",
+      "body": "asdf",
+      "category": "U.S. NEWS",
+      "id": "f448"
+    }
+  ]
+}
