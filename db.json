@@ -6,7 +6,9 @@
       "userType": "admin",
       "username": "admin",
       "password": "admin",
-      "bookmarks": []
+      "bookmarks": [
+        "1"
+      ]
     }
   ],
   "news": [
@@ -20,7 +22,7 @@
       "url": "https://www.huffpost.com/entry/covid-boosters-uptake-us_n_632d719ee4b087fae6feaac9",
       "image": "https://picsum.photos/seed/usnews0/600/400",
       "likes": 1,
-      "bookmarks": 0,
+      "bookmarks": 1,
       "comments": []
     },
     {
