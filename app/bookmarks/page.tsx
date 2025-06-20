@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState, SetStateAction } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import NewsCard from "../../components/news-card";
 import { User, News } from "../global";
