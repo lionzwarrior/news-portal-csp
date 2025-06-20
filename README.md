@@ -1,6 +1,6 @@
 # Preparation
 1. npm install
-2, npm install -g json-server
+2. npm install -g json-server
 
 # To run json-server
 1. Launch a bash terminal
