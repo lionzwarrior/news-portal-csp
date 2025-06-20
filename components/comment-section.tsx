@@ -1,7 +1,9 @@
 import { useState } from 'react';
-import { UpdateNews } from '@/app/global';
+import { News, User } from '@/app/global';
 
-export default function CommentSection({ news }: UpdateNews) {
+export default function CommentSection({ news }: {
+  news: News;
+}) {
   const [comments, setComments] = useState(news.comments);
   const [comment, setComment] = useState('');
 

@@ -14,13 +14,6 @@ export type News = {
     comments: {id: string, text: string}[]
 }
 
-export interface UpdateNews {
-  news: News;
-  user: User;
-  setNews: React.Dispatch<React.SetStateAction<any[]>>;
-  setUser: React.Dispatch<React.SetStateAction<any>>;
-}
-
 export type User = {
     id: string,
     name: string,

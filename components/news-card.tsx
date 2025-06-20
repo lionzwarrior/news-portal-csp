@@ -2,10 +2,15 @@
 
 import React, { useState, useEffect, SyntheticEvent } from 'react';
 import './news-card.css';
-import { UpdateNews } from '@/app/global';
+import { News, User } from '@/app/global';
 import axios from 'axios';
 
-export default function NewsCard({ news, user, setNews, setUser }: UpdateNews) {
+export default function NewsCard({ news, user, setNews, setUser }: {
+  news: News;
+  user: User;
+  setNews: React.Dispatch<React.SetStateAction<any[]>>;
+  setUser: React.Dispatch<React.SetStateAction<any>>;
+}) {
   const [bookmarked, setBookmarked] = useState(false);
   const [isMutating, setIsMutating] = useState(false);
 
