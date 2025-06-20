@@ -1,8 +1,10 @@
-"use client"
+'use client';
 
 import { useEffect, useState } from 'react';
-import { categories, News } from '../global';
+import { categories, News, User } from '../global';
 import axios from 'axios';
+import { getUserId } from '@/context/UserContext';
+import { useRouter } from 'next/navigation';
 
 async function getNews() {
   const res = await axios.get("http://localhost:5000/news");
@@ -10,34 +12,37 @@ async function getNews() {
 }
 
 export default function AdminPage() {
+  const { id: userId } = getUserId();
   const [newsList, setNewsList] = useState<News[]>([]);
   const [formData, setFormData] = useState({ title: '', body: '', category: '' });
   const [editId, setEditId] = useState("");
+  const [loading, setLoading] = useState(true);
+  const router = useRouter();
 
-  async function fetchNews(category: string) {
+  const fetchNews = async (category: string) => {
     const news: News[] = await getNews();
     if (category) {
-      const filteredNews = news.filter(news => news.category.toLowerCase() === category.toLowerCase())
-      setNewsList(filteredNews);
+      const filtered = news.filter(n => n.category.toLowerCase() === category.toLowerCase());
+      setNewsList(filtered);
     } else {
       setNewsList(news);
     }
-  }
-
-  useEffect(() => {
-    fetchNews("");
-  }, []);
+  };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (editId) {
-      await axios.put(`http://localhost:5000/news/${editId}`, formData);
-    } else {
-      await axios.post('http://localhost:5000/news', formData);
+    try {
+      if (editId) {
+        await axios.put(`http://localhost:5000/news/${editId}`, formData);
+      } else {
+        await axios.post('http://localhost:5000/news', formData);
+      }
+      setFormData({ title: '', body: '', category: '' });
+      setEditId("");
+      fetchNews("");
+    } catch (err) {
+      console.error("Failed to submit news:", err);
     }
-    setFormData({ title: '', body: '', category: '' });
-    setEditId("");
-    fetchNews("");
   };
 
   const handleEdit = (item: News) => {
@@ -46,9 +51,40 @@ export default function AdminPage() {
   };
 
   const handleDelete = async (id: string) => {
-    await axios.delete(`http://localhost:5000/news/${id}`);
-    fetchNews("");
+    try {
+      await axios.delete(`http://localhost:5000/news/${id}`);
+      fetchNews("");
+    } catch (err) {
+      console.error("Failed to delete news:", err);
+    }
   };
+
+  useEffect(() => {
+    if (!userId) {
+      router.push('/');
+      return;
+    }
+
+    const checkAccessAndLoad = async () => {
+      try {
+        const res = await axios.get<User>(`http://localhost:5000/user/${userId}`);
+        if (res.data?.userType !== 'admin') {
+          router.push('/');
+          return;
+        }
+        await fetchNews("");
+      } catch (err) {
+        console.error("Access check failed:", err);
+        router.push('/');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    checkAccessAndLoad();
+  }, [userId, router]);
+
+  if (loading) return <p>Loading...</p>;
 
   return (
     <div style={{ padding: '2rem' }}>

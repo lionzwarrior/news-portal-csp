@@ -9,6 +9,14 @@
       "bookmarks": [
         "1"
       ]
+    },
+    {
+      "name": "asdfgasdf",
+      "username": "asdfg",
+      "password": "asdf",
+      "userType": "user",
+      "bookmarks": [],
+      "id": "335b"
     }
   ],
   "news": [
@@ -82,6 +90,12 @@
       "body": "asdf",
       "category": "U.S. NEWS",
       "id": "f448"
+    },
+    {
+      "id": "2fc1",
+      "title": "asdf",
+      "body": "asdf",
+      "category": "SPORTS"
     }
   ]
 }
