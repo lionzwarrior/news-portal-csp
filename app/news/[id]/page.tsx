@@ -1,7 +1,7 @@
 'use client';
 
-import { useParams } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { useParams, useRouter } from 'next/navigation';
+import { SyntheticEvent, useEffect, useState } from 'react';
 import axios from 'axios';
 import { News, User } from '@/app/global';
 import { getUserId } from '@/context/UserContext';
@@ -14,9 +14,15 @@ export default function NewsDetailPage() {
   const [user, setUser] = useState<User | null>(null);
   const [commentText, setCommentText] = useState('');
   const [loading, setLoading] = useState(true);
+  const [isMutating, setIsMutating] = useState(false);
+  const router = useRouter();
+  const [bookmarked, setBookmarked] = useState(false);
 
   useEffect(() => {
-    if (!id || !userId) return;
+    if (!userId || !id) {
+      router.push("/");
+      return;
+    }
 
     const fetchData = async () => {
       try {
@@ -26,6 +32,10 @@ export default function NewsDetailPage() {
         ]);
         setNews(newsData);
         setUser(userData);
+
+        if (userData.bookmarks.includes(id)) {
+          setBookmarked(true)
+        }
       } catch (error) {
         console.error("Failed to fetch data:", error);
       } finally {
@@ -34,7 +44,7 @@ export default function NewsDetailPage() {
     };
 
     fetchData();
-  }, [id, userId]);
+  }, [id, userId, router]);
 
   const handleCommentSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -59,6 +69,71 @@ export default function NewsDetailPage() {
     }
   };
 
+  async function handleLikes(e: SyntheticEvent) {
+    e.preventDefault();
+
+    if (news) {
+      setIsMutating(true);
+      await axios.patch(`http://localhost:5000/news/${news.id}`, {
+        likes: news.likes + 1
+      });
+      const { data: updatedNews } = await axios.get(`http://localhost:5000/news/${news.id}`);
+      setNews(updatedNews);
+      setIsMutating(false);
+    } else {
+      alert("current news is not found")
+    }
+  }
+
+  async function handleBookmark(e: SyntheticEvent) {
+    e.preventDefault();
+
+    if (news && user) {
+      setIsMutating(true);
+
+      const bookmarkedList = user.bookmarks || [];
+
+      if (bookmarkedList.includes(news.id)) {
+        await axios.patch(`http://localhost:5000/news/${news.id}`, {
+          bookmarks: Math.max((news.bookmarks || 1) - 1, 0),
+        });
+
+        const updatedBookmarks = bookmarkedList.filter((nid) => nid !== news.id);
+
+        await axios.patch(`http://localhost:5000/user/${user.id}`, {
+          bookmarks: updatedBookmarks,
+        });
+
+        setBookmarked(false);
+      } else {
+        await axios.patch(`http://localhost:5000/news/${news.id}`, {
+          bookmarks: (news.bookmarks || 0) + 1,
+        });
+
+        const updatedBookmarks = [...bookmarkedList, news.id];
+
+        await axios.patch(`http://localhost:5000/user/${user.id}`, {
+          bookmarks: updatedBookmarks,
+        });
+
+        setBookmarked(true);
+      }
+
+      const [{ data: updatedNews }, { data: updatedUser }] = await Promise.all([
+        axios.get(`http://localhost:5000/news/${news.id}`),
+        axios.get(`http://localhost:5000/user/${user.id}`),
+      ]);
+
+      setNews(updatedNews);
+      setUser(updatedUser);
+
+      setIsMutating(false);
+    } else {
+      alert("Either news or user can't be found.");
+    }
+  }
+
+
   if (loading || !news) return <p className="p-4">Loading...</p>;
 
   return (
@@ -72,8 +147,8 @@ export default function NewsDetailPage() {
       <p className="mb-4 text-gray-700">{news.description}</p>
 
       <div className="flex gap-4 mb-6">
-        <button className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded">👍 {news.likes}</button>
-        <button className="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded">🔖 {news.bookmarks}</button>
+        <button className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded" disabled={isMutating} onClick={handleLikes}>👍 {news.likes}</button>
+        <button className="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded" disabled={isMutating} onClick={handleBookmark}>🔖 {news.bookmarks} {bookmarked ? 'Bookmarked' : 'Bookmark'}</button>
       </div>
 
       <div className="mb-6">

@@ -26,7 +26,8 @@
       "password": "asdf",
       "userType": "user",
       "bookmarks": [
-        "1"
+        "1",
+        "3"
       ]
     }
   ],
@@ -69,9 +70,20 @@
       "author": "Mary Papenfuss",
       "url": "https://www.huffpost.com/entry/american-airlines-passenger-banned-flight-attendant-punch-justice-department_n_632e25d3e4b0e247890329fe",
       "image": "https://picsum.photos/seed/usnews1/600/400",
-      "likes": 7,
+      "likes": 10,
       "bookmarks": 1,
-      "comments": []
+      "comments": [
+        {
+          "id": "b8eea2b6-3219-42f1-b46c-b3dfa62d1ea8",
+          "text": "Hello everybody",
+          "username": "admin"
+        },
+        {
+          "id": "ff823945-f696-4a45-ae42-f35a779b1f7e",
+          "text": "my name is admin, enjoy the news pls",
+          "username": "admin"
+        }
+      ]
     },
     {
       "id": "3",
@@ -82,8 +94,8 @@
       "author": "Elyse Wanshel",
       "url": "https://www.huffpost.com/entry/funniest-tweets-cats-dogs-september-17-23_n_632de332e4b0695c1d81dc02",
       "image": "https://picsum.photos/seed/general2/600/400",
-      "likes": 13,
-      "bookmarks": 1,
+      "likes": 16,
+      "bookmarks": 2,
       "comments": [
         {
           "id": "1750522106229",
@@ -94,6 +106,11 @@
           "id": "253e1b61-abab-4d0d-ae6d-d8238e6bcd78",
           "text": "kere",
           "username": "admin"
+        },
+        {
+          "id": "a1e7f1ae-e2b1-43ee-b8f4-2d9250bb329b",
+          "text": "wow bisa bilang kere ya admin wwkkw",
+          "username": "asdf"
         }
       ]
     },
@@ -144,7 +161,14 @@
       "title": "asdf",
       "body": "asdf",
       "category": "U.S. NEWS",
-      "id": "f448"
+      "id": "f448",
+      "comments": [
+        {
+          "id": "96bf0274-11e6-43c1-a186-0d9a9abf2931",
+          "text": "news opo iki, kok gk onok isi e wkwkw",
+          "username": "asdf"
+        }
+      ]
     },
     {
       "id": "2fc1",
