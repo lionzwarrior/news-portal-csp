@@ -86,7 +86,12 @@ export default function NewsCard({ news, user, setNews, setUser }: {
   }, [user, news.id]);
 
   const handleCardClick = () => {
-    router.push(`/news/${news.id}`);
+    if (user) {
+      router.push(`/news/${news.id}`);
+    } else {
+      alert("You have to login first to view the news.")
+    }
+
   };
 
   return (
