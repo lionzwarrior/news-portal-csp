@@ -5,6 +5,7 @@ import Navbar from "../components/navbar";
 import { cookies } from "next/headers";
 import { UserProvider } from "@/context/UserContext";
 import jwt from "jsonwebtoken";
+import "./globals.css";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -41,8 +42,10 @@ export default async function RootLayout({
   }
 
   return (
-    <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+    <html lang="en" className="bg-gray-50">
+      <body
+        className={`min-h-screen ${geistSans.variable} ${geistMono.variable} antialiased bg-gray-50 text-gray-900`}
+      >
         <Navbar id={usernameId} />
         <UserProvider value={{ id: usernameId }}>
           {children}

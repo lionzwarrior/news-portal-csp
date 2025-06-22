@@ -1,3 +1,5 @@
+import { ReactNode } from "react";
+
 export const categories = ['U.S. NEWS', 'POLITICS', 'WORLD NEWS', 'ENTERTAINMENT', 'PARENTING', 'FOOD & DRINK', 'SPORTS', 'CRIME', 'ENVIRONMENT', 'BLACK VOICES', 'CULTURE & ARTS', 'TECH'];
 
 export type News = {
@@ -11,7 +13,9 @@ export type News = {
     image: string,
     likes: number,
     bookmarks: number,
-    comments: {id: string, text: string}[]
+    comments: {
+        username: ReactNode;id: string, text: string
+}[]
 }
 
 export type User = {
@@ -22,3 +26,11 @@ export type User = {
     password: string,
     bookmarks: string[]
 }
+
+export type Comment = {
+  newsId: string;
+  username: string;
+  text: string;
+  createdAt: string;
+  id: string;
+};

@@ -1,11 +1,11 @@
-"use client"
+'use client';
 
 import { useEffect, useState } from "react";
 import axios from "axios";
 import NewsCard from "../../components/news-card";
 import { User, News } from "../global";
 import { getUserId } from "@/context/UserContext";
-import { redirect, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 async function getUser(id: string | null) {
   const res = await axios.get(`http://localhost:5000/user/${id}`);
@@ -19,7 +19,7 @@ async function getNews() {
 
 export default function BookmarkPage() {
   const { id: userId } = getUserId();
-  const [user, setUser] = useState<User>();
+  const [user, setUser] = useState<User | null>(null);
   const [newsList, setNewsList] = useState<News[]>([]);
   const [bookmarkedNews, setBookmarkedNews] = useState<News[]>([]);
   const router = useRouter();
@@ -54,20 +54,33 @@ export default function BookmarkPage() {
     fetchData();
   }, [userId, router]);
 
+  if (loading) {
+    return <p className="text-center text-gray-600 py-10">Loading bookmarked news...</p>;
+  }
 
-  return loading ? (<p>Loading bookmarked news...</p>) : (
-    <div>
-      <h2>📌 Berita yang Telah di-Bookmark</h2>
-      {bookmarkedNews.map((news) => (
-        <NewsCard user={user ? user : {
-          id: "",
-          name: "",
-          userType: "",
-          username: "",
-          password: "",
-          bookmarks: []
-        }} news={news} setNews={setNewsList} setUser={setUser} key={news.id} {...news} />
-      ))}
+  const count = bookmarkedNews.length;
+
+  return (
+    <div className="p-8">
+      <h2 className="text-2xl font-semibold mb-6">
+        📌 {count} Berita yang Telah di-Bookmark
+      </h2>
+      {count > 0 ? (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {bookmarkedNews.map((news) => (
+            <NewsCard
+              user={user}
+              news={news}
+              setNews={setNewsList}
+              setUser={setUser}
+              key={news.id}
+              {...news}
+            />
+          ))}
+        </div>
+      ) : (
+        <p className="text-center text-gray-500">Belum ada berita yang di-bookmark.</p>
+      )}
     </div>
   );
 }

@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import { useEffect, useState } from 'react';
 import { categories, News, User } from '../global';
@@ -84,46 +84,71 @@ export default function AdminPage() {
     checkAccessAndLoad();
   }, [userId, router]);
 
-  if (loading) return <p>Loading...</p>;
+  if (loading) return <p className="text-center py-10 text-gray-500">Loading...</p>;
 
   return (
-    <div style={{ padding: '2rem' }}>
-      <h2>Admin - Kelola Berita</h2>
-      <form onSubmit={handleSubmit}>
+    <div className="max-w-4xl mx-auto py-10 px-4 bg-gray-50 min-h-screen">
+      <h2 className="text-3xl font-bold mb-8 text-emerald-700">Admin - Kelola Berita</h2>
+
+      <form onSubmit={handleSubmit} className="space-y-5 bg-white shadow-xl rounded-2xl p-6 mb-10">
         <input
-          placeholder="Judul"
+          placeholder="Judul berita"
           value={formData.title}
           onChange={e => setFormData({ ...formData, title: e.target.value })}
           required
+          className="w-full border border-gray-300 px-4 py-2 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-emerald-400"
         />
         <textarea
           placeholder="Isi berita"
           value={formData.body}
           onChange={e => setFormData({ ...formData, body: e.target.value })}
           required
+          rows={4}
+          className="w-full border border-gray-300 px-4 py-2 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-emerald-400"
         />
         <select
           value={formData.category}
           onChange={e => setFormData({ ...formData, category: e.target.value })}
           required
+          className="w-full border border-gray-300 px-4 py-2 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-emerald-400"
         >
           <option value="">Pilih Kategori</option>
           {categories.map(cat => (
             <option key={cat} value={cat}>{cat}</option>
           ))}
         </select>
-        <button type="submit">{editId ? 'Update' : 'Tambah'} Berita</button>
+        <button
+          type="submit"
+          className="w-full bg-emerald-600 text-white py-2 rounded-lg hover:bg-emerald-700 transition"
+        >
+          {editId ? 'Update' : 'Tambah'} Berita
+        </button>
       </form>
 
-      <ul>
+      <div className="space-y-4">
         {newsList.map(item => (
-          <li key={item.id}>
-            <strong>{item.title}</strong> - {item.category}
-            <button onClick={() => handleEdit(item)}>Edit</button>
-            <button onClick={() => handleDelete(item.id)}>Hapus</button>
-          </li>
+          <div key={item.id} className="bg-white p-5 rounded-xl shadow-lg flex flex-col sm:flex-row justify-between items-start sm:items-center">
+            <div className="mb-2 sm:mb-0">
+              <h3 className="text-lg font-semibold text-gray-800">{item.title}</h3>
+              <p className="text-sm text-gray-500 italic">{item.category}</p>
+            </div>
+            <div className="flex gap-2 mt-2 sm:mt-0">
+              <button
+                onClick={() => handleEdit(item)}
+                className="px-4 py-1 rounded-lg bg-yellow-400 hover:bg-yellow-500 text-white text-sm shadow"
+              >
+                Edit
+              </button>
+              <button
+                onClick={() => handleDelete(item.id)}
+                className="px-4 py-1 rounded-lg bg-rose-500 hover:bg-rose-600 text-white text-sm shadow"
+              >
+                Hapus
+              </button>
+            </div>
+          </div>
         ))}
-      </ul>
+      </div>
     </div>
   );
 }

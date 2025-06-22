@@ -7,16 +7,27 @@
       "username": "admin",
       "password": "admin",
       "bookmarks": [
-        "1"
+        "2",
+        "3"
       ]
     },
     {
-      "name": "asdfgasdf",
-      "username": "asdfg",
+      "id": "02d2",
+      "name": "rafael",
+      "username": "raf",
+      "password": "123",
+      "userType": "user",
+      "bookmarks": []
+    },
+    {
+      "id": "3534",
+      "name": "asdf",
+      "username": "asdf",
       "password": "asdf",
       "userType": "user",
-      "bookmarks": [],
-      "id": "335b"
+      "bookmarks": [
+        "1"
+      ]
     }
   ],
   "news": [
@@ -31,7 +42,23 @@
       "image": "https://picsum.photos/seed/usnews0/600/400",
       "likes": 1,
       "bookmarks": 1,
-      "comments": []
+      "comments": [
+        {
+          "id": "1750521531576",
+          "text": "damn good",
+          "username": "admin"
+        },
+        {
+          "id": "1750521891319",
+          "text": "uapik",
+          "username": "admin"
+        },
+        {
+          "id": "1750521906071",
+          "text": "mantap",
+          "username": "admin"
+        }
+      ]
     },
     {
       "id": "2",
@@ -43,7 +70,7 @@
       "url": "https://www.huffpost.com/entry/american-airlines-passenger-banned-flight-attendant-punch-justice-department_n_632e25d3e4b0e247890329fe",
       "image": "https://picsum.photos/seed/usnews1/600/400",
       "likes": 7,
-      "bookmarks": 0,
+      "bookmarks": 1,
       "comments": []
     },
     {
@@ -56,8 +83,19 @@
       "url": "https://www.huffpost.com/entry/funniest-tweets-cats-dogs-september-17-23_n_632de332e4b0695c1d81dc02",
       "image": "https://picsum.photos/seed/general2/600/400",
       "likes": 13,
-      "bookmarks": 0,
-      "comments": []
+      "bookmarks": 1,
+      "comments": [
+        {
+          "id": "1750522106229",
+          "text": "tes",
+          "username": "admin"
+        },
+        {
+          "id": "253e1b61-abab-4d0d-ae6d-d8238e6bcd78",
+          "text": "kere",
+          "username": "admin"
+        }
+      ]
     },
     {
       "id": "4",
@@ -70,7 +108,13 @@
       "image": "https://picsum.photos/seed/parenting3/600/400",
       "likes": 4,
       "bookmarks": 0,
-      "comments": []
+      "comments": [
+        {
+          "id": "ec8269fd-f895-433f-aa70-2dc92cfaff1c",
+          "text": "sip  sih",
+          "username": "raf"
+        }
+      ]
     },
     {
       "id": "5",
@@ -83,7 +127,18 @@
       "image": "https://picsum.photos/seed/usnews4/600/400",
       "likes": 0,
       "bookmarks": 0,
-      "comments": []
+      "comments": [
+        {
+          "id": "1750522170456",
+          "text": "lepak",
+          "username": "admin"
+        },
+        {
+          "id": "1f021c42-3286-4287-8205-26b2ba43efec",
+          "text": "mantap",
+          "username": "raf"
+        }
+      ]
     },
     {
       "title": "asdf",
