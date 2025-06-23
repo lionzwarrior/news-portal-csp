@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from 'react';
+import { ReactNode, useEffect, useState } from 'react';
 import { categories, News, User } from '../global';
 import axios from 'axios';
 import { getUserId } from '@/context/UserContext';
@@ -14,7 +14,11 @@ async function getNews() {
 export default function AdminPage() {
   const { id: userId } = getUserId();
   const [newsList, setNewsList] = useState<News[]>([]);
-  const [formData, setFormData] = useState({ title: '', description: '', body: '', category: '', author: '', image: '' });
+  const [formData, setFormData] = useState<{
+    title: string, description: string, body: string, category: string, author: string, image: string, likes: number, bookmarks: number, comments: {
+      username: ReactNode; id: string, text: string
+    }[]
+  }>({ title: '', description: '', body: '', category: '', author: '', image: '', likes: 0, bookmarks: 0, comments: [] });
   const [editId, setEditId] = useState("");
   const [loading, setLoading] = useState(true);
   const router = useRouter();
@@ -37,7 +41,7 @@ export default function AdminPage() {
       } else {
         await axios.post('http://localhost:5000/news', formData);
       }
-      setFormData({ title: '', description: '', body: '', category: '', author: '', image: '' });
+      setFormData({ title: '', description: '', body: '', category: '', author: '', image: '', likes: 0, bookmarks: 0, comments: [] });
       setEditId("");
       fetchNews("");
     } catch (err) {
@@ -47,8 +51,13 @@ export default function AdminPage() {
 
   const handleEdit = (item: News) => {
     setEditId(item.id);
-    setFormData({ title: item.title, description: item.description, body: item.body, category: item.category, author: item.author, image: item.image });
+    setFormData({ title: item.title, description: item.description, body: item.body, category: item.category, author: item.author, image: item.image, likes: item.likes, bookmarks: item.bookmarks, comments: item.comments });
   };
+
+  const cancelEdit = () => {
+    setEditId("");
+    setFormData({ title: '', description: '', body: '', category: '', author: '', image: '', likes: 0, bookmarks: 0, comments: [] });
+  }
 
   const handleDelete = async (id: string) => {
     try {
@@ -145,6 +154,14 @@ export default function AdminPage() {
         >
           {editId ? 'Update' : 'Tambah'} Berita
         </button>
+        {editId ? (<button
+          type="button"
+          onClick={cancelEdit}
+          className="w-full bg-red-600 text-white py-2 rounded-lg hover:bg-red-700 transition"
+        >
+          Cancel
+        </button>) : ""}
+
       </form>
 
       <div className="space-y-4">

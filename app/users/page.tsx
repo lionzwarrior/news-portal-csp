@@ -68,6 +68,11 @@ export default function UsersPage() {
     });
   };
 
+  const cancelEdit = () => {
+    setEditId("");
+    setFormData({ name: '', username: '', password: '', userType: "user", bookmarks: [] });
+  }
+
   const handleDelete = async (id: string) => {
     await axios.delete(`http://localhost:5000/user/${id}`);
     fetchUsers();
@@ -137,6 +142,13 @@ export default function UsersPage() {
         >
           {editId ? 'Update' : 'Tambah'} User
         </button>
+        {editId ? (<button
+          type="button"
+          onClick={cancelEdit}
+          className="w-full bg-red-600 text-white py-2 rounded-lg hover:bg-red-700 transition"
+        >
+          Cancel
+        </button>) : ""}
       </form>
 
       <div className="space-y-4">
