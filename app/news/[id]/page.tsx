@@ -144,6 +144,8 @@ export default function NewsDetailPage() {
         alt="news"
         className="w-full h-auto rounded-lg mb-4"
       />
+      <p className="mb-4 text-gray-700">Category: {news.category}</p>
+      <p className="mb-4 text-gray-700">Author: {news.author}</p>
       <p className="mb-4 text-gray-700">{news.body}</p>
 
       <div className="flex gap-4 mb-6">

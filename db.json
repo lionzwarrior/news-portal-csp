@@ -8,7 +8,8 @@
       "password": "admin",
       "bookmarks": [
         "2",
-        "3"
+        "3",
+        "6a81"
       ]
     },
     {
@@ -164,7 +165,9 @@
       "body": "asdfqwerasdf",
       "category": "WORLD NEWS",
       "author": "asdf",
-      "image": "https://images.sftcdn.net/images/t_app-cover-l,f_auto/p/41576db2-6f9e-4be7-9d7b-7017585f579a/733774297/random-image-generator-screenshot.png"
+      "image": "https://images.sftcdn.net/images/t_app-cover-l,f_auto/p/41576db2-6f9e-4be7-9d7b-7017585f579a/733774297/random-image-generator-screenshot.png",
+      "likes": 2,
+      "bookmarks": 1
     }
   ]
 }
