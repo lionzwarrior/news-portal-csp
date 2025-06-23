@@ -144,7 +144,7 @@ export default function NewsDetailPage() {
         alt="news"
         className="w-full h-auto rounded-lg mb-4"
       />
-      <p className="mb-4 text-gray-700">{news.description}</p>
+      <p className="mb-4 text-gray-700">{news.body}</p>
 
       <div className="flex gap-4 mb-6">
         <button className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded" disabled={isMutating} onClick={handleLikes}>👍 {news.likes}</button>

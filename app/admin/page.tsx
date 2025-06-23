@@ -14,7 +14,7 @@ async function getNews() {
 export default function AdminPage() {
   const { id: userId } = getUserId();
   const [newsList, setNewsList] = useState<News[]>([]);
-  const [formData, setFormData] = useState({ title: '', body: '', category: '' });
+  const [formData, setFormData] = useState({ title: '', description: '', body: '', category: '', author: '', image: '' });
   const [editId, setEditId] = useState("");
   const [loading, setLoading] = useState(true);
   const router = useRouter();
@@ -37,7 +37,7 @@ export default function AdminPage() {
       } else {
         await axios.post('http://localhost:5000/news', formData);
       }
-      setFormData({ title: '', body: '', category: '' });
+      setFormData({ title: '', description: '', body: '', category: '', author: '', image: '' });
       setEditId("");
       fetchNews("");
     } catch (err) {
@@ -47,7 +47,7 @@ export default function AdminPage() {
 
   const handleEdit = (item: News) => {
     setEditId(item.id);
-    setFormData({ title: item.title, body: item.body, category: item.category });
+    setFormData({ title: item.title, description: item.description, body: item.body, category: item.category, author: item.author, image: item.image });
   };
 
   const handleDelete = async (id: string) => {
@@ -99,6 +99,14 @@ export default function AdminPage() {
           className="w-full border border-gray-300 px-4 py-2 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-emerald-400"
         />
         <textarea
+          placeholder="Deskripsi berita"
+          value={formData.description}
+          onChange={e => setFormData({ ...formData, description: e.target.value })}
+          required
+          rows={4}
+          className="w-full border border-gray-300 px-4 py-2 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-emerald-400"
+        />
+        <textarea
           placeholder="Isi berita"
           value={formData.body}
           onChange={e => setFormData({ ...formData, body: e.target.value })}
@@ -117,6 +125,20 @@ export default function AdminPage() {
             <option key={cat} value={cat}>{cat}</option>
           ))}
         </select>
+        <input
+          placeholder="Penulis berita"
+          value={formData.author}
+          onChange={e => setFormData({ ...formData, author: e.target.value })}
+          required
+          className="w-full border border-gray-300 px-4 py-2 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-emerald-400"
+        />
+        <input
+          placeholder="Link gambar berita"
+          value={formData.image}
+          onChange={e => setFormData({ ...formData, image: e.target.value })}
+          required
+          className="w-full border border-gray-300 px-4 py-2 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-emerald-400"
+        />
         <button
           type="submit"
           className="w-full bg-emerald-600 text-white py-2 rounded-lg hover:bg-emerald-700 transition"
